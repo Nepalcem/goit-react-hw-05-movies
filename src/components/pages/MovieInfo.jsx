@@ -41,6 +41,7 @@ const MovieInfo = () => {
             src={`${IMAGE_URL}/${imageSize}/${poster_path || backdrop_path}`}
             alt={title || name}
             height={400}
+            width={267}
           />
         </div>
         <div className="movie-info">
