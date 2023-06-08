@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import fetchApi from 'utilities/api-service';
 import { apiRefs } from 'utilities/api-service';
 import { IMAGE_URL } from 'utilities/api-service';
+import { MovieBlock, AdditionalMovieinfo } from './MovieInfo.styled';
+
 const imageSize = 'w500';
 
 const MovieInfo = () => {
@@ -32,26 +34,39 @@ const MovieInfo = () => {
   } = movieObj;
 
   return (
-    <div>
-      <div>
-        <img
-          src={`${IMAGE_URL}/${imageSize}/${poster_path || backdrop_path}`}
-          alt={title || name}
-          height={400}
-        />
-      </div>
-      <div className="movie-info">
-        <h2>
-          {title || name} {movieId} Page
-        </h2>
-        <p> Popularity: {popularity}</p>
-        <p>Overview: {overview}</p>
-        <p>Genres:</p>
-        {genres && genres.map(({id,name}) => {
-          return <li key={id}>{name}</li>
-        })}
-      </div>
-    </div>
+    <>
+      <MovieBlock>
+        <div>
+          <img
+            src={`${IMAGE_URL}/${imageSize}/${poster_path || backdrop_path}`}
+            alt={title || name}
+            height={400}
+          />
+        </div>
+        <div className="movie-info">
+          <h2>
+            {title || name} {movieId} Page
+          </h2>
+          <p> Popularity: {popularity}</p>
+          <p>Overview: {overview}</p>
+          <p>Genres:</p>
+          {genres &&
+            genres.map(({ id, name }) => {
+              return <li key={id}>{name}</li>;
+            })}
+        </div>
+      </MovieBlock>
+      <AdditionalMovieinfo>
+        <h4>Additional Information</h4>
+        <p>
+          <Link to="cast">Cast</Link>
+        </p>
+        <p>
+          <Link to="reviews">Reviews</Link>
+        </p>
+      </AdditionalMovieinfo>
+      <Outlet />
+    </>
   );
 };
 
