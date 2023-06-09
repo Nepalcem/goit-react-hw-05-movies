@@ -8,6 +8,7 @@ export const apiRefs = {
     SEARCH: 'search',
     MOVIE_DETAILS: 'movieDetails',
     MOVIE_VIDEO: 'movieVideo',
+    CREDITS: 'credits',
   };
 
   export default async function fetchApi({
@@ -21,6 +22,7 @@ export const apiRefs = {
       search: `/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
       movieDetails: `/movie/${id}?api_key=${API_KEY}`,
       movieVideo: `/movie/${id}/videos?api_key=${API_KEY}`,
+      credits: `/movie/${id}/credits?api_key=${API_KEY}`
     };
   
     const response = await axios.get(`${BASE_URL}${searchTypes[param]}`);
