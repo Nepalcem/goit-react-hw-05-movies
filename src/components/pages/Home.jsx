@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import fetchApi from 'utilities/api-service';
 
 function Home() {
   const [movies, setMovies] = useState([]);
+
+  const location = useLocation();
+
   useEffect(() => {
     const getData = async () => {
       const response = await fetchApi({ page: 1 });
@@ -19,7 +22,7 @@ function Home() {
         {movies.map(({ id, title, name }) => {
           return (
             <li key={id}>
-              <Link to={`movies/${id}`}>{title || name}</Link>
+              <Link to={`movies/${id}`} state={{from: location}}>{title || name}</Link>
             </li>
           );
         })}

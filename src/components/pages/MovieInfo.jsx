@@ -1,27 +1,28 @@
-import React, { useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import fetchApi, {imageSize,apiRefs,IMAGE_URL } from 'utilities/api-service';
+import fetchApi, { imageSize, apiRefs, IMAGE_URL } from 'utilities/api-service';
 import { MovieBlock, AdditionalMovieinfo } from './MovieInfo.styled';
 import { toast } from 'react-toastify';
-
-
 
 const MovieInfo = () => {
   const [movieObj, setMovieObj] = useState({});
   const { movieId } = useParams();
+  const location = useLocation();
+
+  const linkLocationRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const getData = async () => {
       try {
-      const response = await fetchApi({
-        param: apiRefs.MOVIE_DETAILS,
-        id: movieId,
-      });
-      setMovieObj(response);
-    } catch (error) {
-      toast.error(error.message);
-    }
+        const response = await fetchApi({
+          param: apiRefs.MOVIE_DETAILS,
+          id: movieId,
+        });
+        setMovieObj(response);
+      } catch (error) {
+        toast.error(error.message);
+      }
     };
     getData();
   }, [movieId]);
@@ -38,6 +39,7 @@ const MovieInfo = () => {
 
   return (
     <>
+      <Link to={linkLocationRef.current}>Back to Trending</Link>
       <MovieBlock>
         <div>
           <img
@@ -48,9 +50,7 @@ const MovieInfo = () => {
           />
         </div>
         <div className="movie-info">
-          <h2>
-            {title || name} 
-          </h2>
+          <h2>{title || name}</h2>
           <p> Popularity: {popularity}</p>
           <p>Overview: {overview}</p>
           <p>Genres:</p>
