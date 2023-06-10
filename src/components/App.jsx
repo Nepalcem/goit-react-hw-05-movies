@@ -3,8 +3,11 @@ import { SharedLayout } from './sharedLayout/SharedLayout';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import MovieInfo from './pages/MovieInfo';
-import Cast from './pages/Cast';
-import Reviews from './pages/Reviews';
+import Cast from './pages/cast/Cast';
+import Reviews from './pages/reviews/Reviews';
+
+
+
 
 export const App = () => {
   return (
@@ -17,6 +20,8 @@ export const App = () => {
           <Route path="reviews" element={<Reviews />} />
         </Route>
       </Route>
+
     </Routes>
+
   );
 };

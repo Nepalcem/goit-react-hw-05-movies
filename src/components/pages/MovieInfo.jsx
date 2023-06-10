@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import fetchApi from 'utilities/api-service';
-import { apiRefs } from 'utilities/api-service';
-import { IMAGE_URL } from 'utilities/api-service';
+import fetchApi, {imageSize,apiRefs,IMAGE_URL } from 'utilities/api-service';
 import { MovieBlock, AdditionalMovieinfo } from './MovieInfo.styled';
+import { toast } from 'react-toastify';
 
-const imageSize = 'w500';
+
 
 const MovieInfo = () => {
   const [movieObj, setMovieObj] = useState({});
@@ -14,11 +13,15 @@ const MovieInfo = () => {
 
   useEffect(() => {
     const getData = async () => {
+      try {
       const response = await fetchApi({
         param: apiRefs.MOVIE_DETAILS,
         id: movieId,
       });
       setMovieObj(response);
+    } catch (error) {
+      toast.error(error.message);
+    }
     };
     getData();
   }, [movieId]);
@@ -46,7 +49,7 @@ const MovieInfo = () => {
         </div>
         <div className="movie-info">
           <h2>
-            {title || name} {movieId} Page
+            {title || name} 
           </h2>
           <p> Popularity: {popularity}</p>
           <p>Overview: {overview}</p>

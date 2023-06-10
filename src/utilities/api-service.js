@@ -2,6 +2,7 @@ import axios from "axios";
 export const IMAGE_URL = 'https://image.tmdb.org/t/p';
 export const API_KEY = 'cb1bcc244723619ea7f2217b5a84ccd8';
 export const BASE_URL = 'https://api.themoviedb.org/3';
+export const imageSize = 'w500';
 
 export const apiRefs = {
     TRENDING: 'trending',
@@ -9,6 +10,7 @@ export const apiRefs = {
     MOVIE_DETAILS: 'movieDetails',
     MOVIE_VIDEO: 'movieVideo',
     CREDITS: 'credits',
+    REVIEWS: 'reviews',
   };
 
   export default async function fetchApi({
@@ -22,7 +24,8 @@ export const apiRefs = {
       search: `/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
       movieDetails: `/movie/${id}?api_key=${API_KEY}`,
       movieVideo: `/movie/${id}/videos?api_key=${API_KEY}`,
-      credits: `/movie/${id}/credits?api_key=${API_KEY}`
+      credits: `/movie/${id}/credits?api_key=${API_KEY}`,
+      reviews: `/movie/${id}/reviews?api_key=${API_KEY}`,
     };
   
     const response = await axios.get(`${BASE_URL}${searchTypes[param]}`);
