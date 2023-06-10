@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function MovieList({ movies }) {
     const location = useLocation();
+
   return (
     <>
       <h1> Search Results</h1>

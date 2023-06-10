@@ -4,6 +4,7 @@ import { useState } from 'react';
 import fetchApi, { imageSize, apiRefs, IMAGE_URL } from 'utilities/api-service';
 import { MovieBlock, AdditionalMovieinfo } from './MovieInfo.styled';
 import { toast } from 'react-toastify';
+import { StyledLink } from './StyledLink.styled';
 
 const MovieInfo = () => {
   const [movieObj, setMovieObj] = useState({});
@@ -39,7 +40,7 @@ const MovieInfo = () => {
 
   return (
     <>
-      <Link to={linkLocationRef.current}>Go Back</Link>
+      <StyledLink  to={linkLocationRef.current}>{`<<`} Go Back</StyledLink >
       <MovieBlock>
         <div>
           <img
