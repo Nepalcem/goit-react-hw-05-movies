@@ -39,7 +39,7 @@ const MovieInfo = () => {
 
   return (
     <>
-      <Link to={linkLocationRef.current}>Back to Trending</Link>
+      <Link to={linkLocationRef.current}>Go Back</Link>
       <MovieBlock>
         <div>
           <img
