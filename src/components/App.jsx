@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { SharedLayout } from './sharedLayout/SharedLayout';
 import Home from './pages/Home';
 import { lazy } from 'react';
@@ -20,7 +20,7 @@ export const App = () => {
           <Route path="reviews" element={<Reviews />} />
         </Route>
       </Route>
-
+      <Route path='*' element={<Navigate to='/' replace />}  />
     </Routes>
 
   );
